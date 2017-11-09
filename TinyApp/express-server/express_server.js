@@ -6,6 +6,12 @@ const express = require('express'),
 
 let PORT = process.env.PORT || 8080;
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 
 app.set('view engine', 'ejs');
 
@@ -38,10 +44,11 @@ app.get('/urls/:id', (req, res) => {
   res.render('urls_show', templateVars);
 });
 
+//CLick short redirect to full url
 app.get('/u/:shortURL', (req,res) => {
   let shortURL = req.params.shortURL,
       longURL = urlDB[shortURL]; //
-  //let LonguURL =
+
   res.redirect(longURL);
 });
 
@@ -49,16 +56,22 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDB);
 });
 
-function generateRandomString(){
-    let text = " ";
-    let charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+// ----DELETE----
+app.post('/urls/:id/delete', (req, res) => {
+  let id = req.params.id;
+  delete urlDB[id];
+  res.redirect("/urls");
+});
 
-    for( var i=0; i < 6; i++ ){
-      text += charset.charAt(Math.floor(Math.random() * charset.length));
-    }
+// ----UPDATE LONGURL THAT SHORT ID POSTS TO----
+app.post('/urls/:id/update', (req, res) => {
+  let id = req.params.id,
+      longURL = req.body.update;
 
-    return text;
-}
+  urlDB[id] = longURL;
+  res.redirect("/urls");
+});
+
 
 app.post("/urls", (req, res) => {
   console.log(req.body); // debugger to see POST params
@@ -70,3 +83,16 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
 
+
+
+
+function generateRandomString(){
+    let text = " ";
+    let charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 6; i++ ){
+      text += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+
+    return text;
+}

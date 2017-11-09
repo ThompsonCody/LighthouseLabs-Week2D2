@@ -7,9 +7,15 @@
   <!-- Add your EJS code here -->
   <% include partials/_header %>
 
-  <ul>
-        <li><%= shortURL %> : <%= longURL%></li>
-  </ul>
+  <p>
+    <%= shortURL %> : <%= longURL%>
+  </p>
+  <p>
+    <form method="POST" action="/urls/<%= shortURL %>/update">
+      <input id="update" type="text" name="update" placeholder="http://">
+      <input type="submit" value="update">
+    </form>
+  </p>
 
 </body>
 </html>

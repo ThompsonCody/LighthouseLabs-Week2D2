@@ -1,1 +1,10 @@
-<header></header>
+<header>
+  <% if(locals.username) { %>
+  <h2>Logged da fuck in as <%= username%> <form method="POST" action="/logout"><input type="submit" value="logout" name="logout"></form></h2>
+  <%} else{%>
+  <form method="POST" action="/login">
+    <input type="text" name="username" id="username" placeholder="Sign in"/>
+    <input type="submit" name="username"/>
+  </form>
+  <%}%>
+</header>

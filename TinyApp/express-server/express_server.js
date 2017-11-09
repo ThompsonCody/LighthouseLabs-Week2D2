@@ -2,16 +2,18 @@
 
 const express = require('express'),
       app = express(),
-      bodyParser = require("body-parser");
+      bodyParser = require("body-parser"),
+      cookieParser = require("cookie-parser");
 
 let PORT = process.env.PORT || 8080;
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
+app.use(cookieParser())
 
 app.set('view engine', 'ejs');
 
@@ -19,6 +21,10 @@ let urlDB = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com"
 };
+
+
+//--------------------------------------------//
+
 
 app.get("/", (req, res) => {
   res.end("Hello!");
@@ -29,7 +35,7 @@ app.get('/hello', (res, req) => {
 });
 
 app.get('/urls', (req, res) =>{
-  let templateVars = {urls : urlDB};
+  let templateVars = {urls : urlDB, username: req.cookies.username};
   // var data = urlDB;
   res.render('urls_index', templateVars);
 });
@@ -69,6 +75,20 @@ app.post('/urls/:id/update', (req, res) => {
       longURL = req.body.update;
 
   urlDB[id] = longURL;
+  res.redirect("/urls");
+});
+
+//Login route
+app.post('/login', (req, res) =>{
+  let username = req.body["username"];
+      res.cookie("username", username);
+      // cookie;
+  res.redirect("/urls");
+});
+
+//Logout route
+app.post('/logout', (req, res) =>{
+  res.clearCookie("username");
   res.redirect("/urls");
 });
 

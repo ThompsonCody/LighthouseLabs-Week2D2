@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>TinyApp</title>
-</head>
+ <% include partials/_head %>
 <body>
-  <!-- Add your EJS code here -->
   <% include partials/_header %>
+  <!-- <a href="login">Login</a> -->
+
   <ul>
     <% for(url in urls){ %>
         <li><a href= "/urls/<%= url %>"><%= url%></a> : <%= urls[url]%>
@@ -17,5 +14,6 @@
   </ul>
 
   <!-- <a href=#>click to short</a> -->
+  <a href="urls/new">New Link</a>
 </body>
 </html>

@@ -1,10 +1,15 @@
 <header>
-  <% if(locals.username) { %>
-  <h2>Logged da fuck in as <%= username%> <form method="POST" action="/logout"><input type="submit" value="logout" name="logout"></form></h2>
+  <% if(locals.user_id) { %>
+  <h2>Logged da fuck in as <%= console.log(locals)%>
+    <form method="POST" action="/logout">
+      <input type="submit" value="logout" name="logout">
+    </form>
+  </h2>
   <%} else{%>
-  <form method="POST" action="/login">
-    <input type="text" name="username" id="username" placeholder="Sign in"/>
-    <input type="submit" name="username"/>
-  </form>
+
   <%}%>
+  <a href="/urls/register">Sign Up</a>
+
+  <a href="/login">Login</a>
+
 </header>

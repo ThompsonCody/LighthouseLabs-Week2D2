@@ -1,0 +1,13 @@
+ <% include partials/_head %>
+  <body>
+    <form method="POST" action="/login">
+      <input type="email" name="email" placeholder="Enter email">
+      <input type="password" name="password" placeholder="Enter password">
+      <input type="submit" name="login">
+    </form>
+     <% if(locals.error){ %>
+      <h3><%= error%></h3>
+    <%}%>
+  </body>
+</html>
+

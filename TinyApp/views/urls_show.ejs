@@ -3,14 +3,13 @@
   <% include partials/_header %>
 
   <p>
-    <%= shortURL %> : <%= longURL%>
+    <a href="<%= longURL %>"><%= longURL %></a> : <a href=<%=`/urls/${shortURL}`%>><%= shortURL %></a>
   </p>
-  <p>
-    <form method="POST" action="/urls/<%= shortURL %>/update">
-      <input id="update" type="text" name="update" placeholder="http://">
-      <input type="submit" value="update">
-    </form>
-  </p>
-
+  <form method="POST" action="/urls/<%=shortURL%>/update">
+    <label for="longURL">Update URL:</label>
+    <input id="longURL" type="text" name="update_longURL" placeholder=`<%= longURL %>`>
+    <input type="submit" value="Update">
+  </form>
+  <a href="/urls">All short urls</a>
 </body>
 </html>

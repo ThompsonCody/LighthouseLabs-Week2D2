@@ -1,19 +1,24 @@
  <% include partials/_head %>
 <body>
   <% include partials/_header %>
-  <!-- <a href="login">Login</a> -->
 
   <ul>
-    <% for(url in urls){ %>
-        <li><a href= "/urls/<%= url %>"><%= url%></a> : <%= urls[url]%>
-          <form method="POST" action="/urls/<%= url %>/delete">
+    <% for(var shortURL in urls){ %>
+        <li>
+
+          <a href= <%= `/u/${shortURL}` %>><%= shortURL%></a> : <%= urls[shortURL]%>
+          <br>
+          <div style="display:flex; flex-direction:row;"><a href="/urls/<%=shortURL%>"><button>UPDATE</button></a>
+          <form method="POST" action="/urls/<%= shortURL%>/delete">
             <input type="submit" value="delete"/>
-          </form>
+          </form></div >
+
+
         </li>
     <% } %>
+    <li><a href="/urls/new">Create a New Short Link</a></li>
   </ul>
 
-  <!-- <a href=#>click to short</a> -->
-  <a href="urls/new">New Link</a>
+
 </body>
 </html>

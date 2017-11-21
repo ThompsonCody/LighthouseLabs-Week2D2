@@ -1,13 +1,16 @@
  <% include partials/_head %>
 <body>
-  <form method="POST" action="/urls/register">
+  <form method="POST" action="/register">
+    <label for="username">Enter Username:</label>
+    <input id="username" type="text" name="username" placeholder="username">
     <input type="email" name="email" placeholder="Your email">
     <input type="password" name="password" placeholder="Create password">
-    <input type="submit" name="">
+    <input type="submit" name="register" value="register">
   </form>
+
  <% if(locals.error){ %>
   <h3><%= error%></h3>
  <%}%>
-  <!-- <a href=#>click to short</a> -->
+
 </body>
 </html>

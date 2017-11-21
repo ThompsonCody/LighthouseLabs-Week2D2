@@ -224,26 +224,7 @@ app.post('/urls/logout', (req, res) =>{
 
 
 app.get('/urls/:id', (req, res) => {
-
-  // if (!(req.params.id in urlDB)) {
-  //   res.status(404).send('404: Not found');
-  //   return;
-  // }
-
-  // if (req.session.user_id === urlDB[req.params.id].userID) {
-
-  //   let templateVars = {
-  //     urls: urlDB,
-  //     user: users[req.session.user_id],
-  //     shortURL: req.params.id,
-  //     longURL: urlDB[req.params.id].longURL,
-  //   };
-  //   res.render('urls_show', templateVars);
-
-  // } else {
-  //   res.send('That is not yours!');
-  // }
-    const user = users[req.session["user_id"]];
+  const user = users[req.session["user_id"]];
   if (user) {
     let shortURL = req.params.id;
     let longURL = urlDB[shortURL].longURL;
